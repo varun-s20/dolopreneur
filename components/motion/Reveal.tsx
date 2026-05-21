@@ -27,11 +27,10 @@ export function Reveal({
   ...rest
 }: Props) {
   const reduced = useReducedMotion();
-  const Tag = motion[as];
+  const Tag = motion[as] as React.ElementType;
 
   if (reduced) {
-    const Static = as;
-    // @ts-expect-error - dynamic intrinsic element typing
+    const Static = as as React.ElementType;
     return <Static className={className} {...rest}>{children}</Static>;
   }
 

@@ -71,7 +71,7 @@ export default async function OG({
               color: "#E8E54B",
             }}
           >
-            Playbook · {industry}
+            {`Playbook · ${industry}`}
           </div>
           <div
             style={{
@@ -94,7 +94,7 @@ export default async function OG({
             color: "rgba(236,234,227,0.6)",
           }}
         >
-          <span>Time to ship · {time}</span>
+          <span>{`Time to ship · ${time}`}</span>
           <span
             style={{
               background: "#E8E54B",

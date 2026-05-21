@@ -69,7 +69,7 @@ export default async function OG({
               color: "#6B6B6B",
             }}
           >
-            Service · {name}
+            {`Service · ${name}`}
           </div>
           <div
             style={{
@@ -93,7 +93,7 @@ export default async function OG({
             color: "#6B6B6B",
           }}
         >
-          <span>dolopreneur.com/services/{slug}</span>
+          <span>{`dolopreneur.com/services/${slug}`}</span>
           <span
             style={{
               background: "#1F1F1F",

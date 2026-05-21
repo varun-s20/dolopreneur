@@ -27,8 +27,9 @@ export function ScribbleDraw({ children, delay = 0, duration = 1.1 }: Props) {
 
     if (reduced) return child;
 
+    const MotionPath = motion.path as React.ComponentType<Record<string, unknown>>;
     return (
-      <motion.path
+      <MotionPath
         {...c.props}
         initial={{ pathLength: 0, opacity: 0 }}
         animate={inView ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}

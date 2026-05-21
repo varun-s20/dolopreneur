@@ -24,7 +24,7 @@ export function Odometer({ value, prefix, suffix, format, className }: Props) {
   return (
     <span ref={ref} className={className}>
       {prefix}
-      <NumberFlow value={shown} format={format} />
+      <NumberFlow value={shown} format={format as React.ComponentProps<typeof NumberFlow>["format"]} />
       {suffix}
     </span>
   );
