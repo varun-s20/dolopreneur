@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+:root {
+  --nav-h: 88px;
+}
+@media (min-width: 768px) {
+  :root { --nav-h: 100px; }
+}
+
+@theme {
+  --color-accent: #e8e54b;
+  --color-accent-hover: #dcd944;
+  --color-accent-ink: #1a1a1a;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #3a3a3a;
+  --color-ink-muted: #6b6b6b;
+  --color-surface-dark: #1f1f1f;
+  --color-surface-dark-2: #2c2c2c;
+  --color-bg: #eceae3;
+  --color-card: #fafaf7;
+  --color-line: #d9d6cc;
+  --color-line-dark: #353535;
+
+  --radius-card: 12px;
+  --radius-tile: 16px;
+  --radius-pill: 9999px;
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 0 rgba(26, 26, 26, 0.04), 0 12px 32px -16px rgba(26, 26, 26, 0.08);
+  --shadow-tile: 0 1px 0 rgba(26, 26, 26, 0.04), 0 24px 48px -28px rgba(26, 26, 26, 0.18);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    /* Offset anchor scroll so the floating nav doesn't cover targets */
+    scroll-padding-top: var(--nav-h);
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.55;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    color: var(--color-ink);
+  }
+
+  /* Hide native focus ring on mouse, keep for keyboard */
+  :focus:not(:focus-visible) { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .container-page {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+    max-width: 80rem;
+  }
+  @media (min-width: 768px) { .container-page { padding-inline: 2rem; } }
+  @media (min-width: 1280px) { .container-page { padding-inline: 3rem; } }
+
+  /* Tabela-style notched card corners (subtle inner bite at corners) */
+  .notch-card {
+    --n: 14px;
+    -webkit-mask:
+      radial-gradient(var(--n) at var(--n) var(--n), #0000 98%, #000) -1px -1px,
+      radial-gradient(var(--n) at calc(100% - var(--n)) var(--n), #0000 98%, #000) 1px -1px,
+      radial-gradient(var(--n) at var(--n) calc(100% - var(--n)), #0000 98%, #000) -1px 1px,
+      radial-gradient(var(--n) at calc(100% - var(--n)) calc(100% - var(--n)), #0000 98%, #000) 1px 1px;
+    -webkit-mask-composite: source-over;
+    mask-composite: add;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    -webkit-mask-size: 51% 51%;
+            mask-size: 51% 51%;
+  }
+
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* Soft beige hairline divider */
+  .hairline { box-shadow: inset 0 0 0 1px var(--color-line); }
+  .hairline-dark { box-shadow: inset 0 0 0 1px var(--color-line-dark); }
+
+  /* Hand-drawn yellow scribble underline */
+  .scribble-underline {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 18' preserveAspectRatio='none'><path d='M2 11 C 40 2, 80 18, 120 8 S 180 2, 198 12' fill='none' stroke='%23E8E54B' stroke-width='6' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 100% 0.55em;
+    padding-bottom: 0.05em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
