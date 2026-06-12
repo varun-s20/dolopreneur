@@ -14,7 +14,12 @@ export function getStripe(): Stripe {
     throw new Error("STRIPE_SECRET_KEY is not set. Add it to .env.local.");
   }
   if (!cached) {
-    cached = new Stripe(key, { typescript: true });
+    // Fetch-based HTTP client so the SDK works on the Cloudflare Workers
+    // runtime (and on Node). Avoids the SDK reaching for Node's `https`.
+    cached = new Stripe(key, {
+      httpClient: Stripe.createFetchHttpClient(),
+      typescript: true,
+    });
   }
   return cached;
 }

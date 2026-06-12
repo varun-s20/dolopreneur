@@ -26,7 +26,9 @@ export async function POST(req: Request) {
   const payload = await req.text();
   let event: Stripe.Event;
   try {
-    event = getStripe().webhooks.constructEvent(payload, signature, secret);
+    // Async variant uses Web Crypto — required on the Workers/edge runtime;
+    // the sync constructEvent throws there.
+    event = await getStripe().webhooks.constructEventAsync(payload, signature, secret);
   } catch (err) {
     const message = err instanceof Error ? err.message : "invalid";
     console.error("[webhook] signature verification failed:", message);

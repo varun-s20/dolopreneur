@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // The Worker name. The WORKER_SELF_REFERENCE service binding below must match
+  // this exactly, or Cloudflare rejects the deploy (error code 10143).
+  "name": "dolopreneur",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-04-01",
+  // nodejs_compat is required by OpenNext; global_fetch_strictly_public makes the
+  // Worker's self-fetch (used for ISR/revalidation) go over the public edge.
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".open-next/assets"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "dolopreneur"
+    }
+  ],
+  "images": {
+    "binding": "IMAGES"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

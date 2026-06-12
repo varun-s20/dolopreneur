@@ -1,6 +1,11 @@
 node_modules
 .next
 out
+
+# Cloudflare / OpenNext build output
+.open-next
+.wrangler
+cloudflare-env.d.ts
 # env files — ignore all secrets, keep the committed template
 .env
 .env.*
