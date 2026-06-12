@@ -200,7 +200,7 @@ export default async function PlaybookPage({ params }: { params: Promise<Params>
             headline: `${p.industry}, ${p.outcome}`,
             description: p.subhead,
             author: { "@type": "Organization", name: "Dolopreneur" },
-          }),
+          }).replace(/</g, "\\u003c"),
         }}
       />
       <BreadcrumbLd

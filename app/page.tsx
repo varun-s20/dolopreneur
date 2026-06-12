@@ -1,5 +1,7 @@
 ﻿import { HeroBento } from "@/components/sections/HeroBento";
-import { StatsScribble } from "@/components/sections/StatsScribble";
+// Benefits section, commented out for now to keep the homepage focused on
+// driving visitors straight to a call or the services.
+// import { StatsScribble } from "@/components/sections/StatsScribble";
 import { LoopDiagram } from "@/components/sections/LoopDiagram";
 import { ServicesFeaturesScene } from "@/components/sections/ServicesFeaturesScene";
 import { Playbooks } from "@/components/sections/Playbooks";
@@ -21,7 +23,7 @@ export default function HomePage() {
       <SmoothScroll />
       <ScrollStack>
         <HeroBento />
-        <StatsScribble />
+        {/* <StatsScribble /> */}
         <LoopDiagram />
       </ScrollStack>
       <ServicesFeaturesScene />
@@ -48,7 +50,7 @@ export default function HomePage() {
             },
             description:
               "An AI workforce for solo founders. Chat, sites, and voice handled by ConverseOS, SiteForge, and VoxAgent.",
-          }),
+          }).replace(/</g, "\\u003c"),
         }}
       />
     </>

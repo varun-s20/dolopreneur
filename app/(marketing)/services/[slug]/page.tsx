@@ -16,6 +16,7 @@ import { CallTranscript } from "@/components/product-mocks/CallTranscript";
 import { InboxList } from "@/components/product-mocks/InboxList";
 import { DashboardChart } from "@/components/product-mocks/DashboardChart";
 import { ReservationCard } from "@/components/product-mocks/ReservationCard";
+import { cn } from "@/lib/cn";
 
 type Params = { slug: string };
 
@@ -69,7 +70,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
         <div className="mt-10 grid gap-8 md:mt-14 md:grid-cols-[1.2fr_1fr] md:gap-12">
           <Reveal delay={0.18}>
-            <Card tone="bg" notched>{heroMocks[service.slug]}</Card>
+            <Card tone="bg" className="overflow-hidden">{heroMocks[service.slug]}</Card>
           </Reveal>
 
           <Reveal delay={0.22} className="flex flex-col justify-center">
@@ -108,8 +109,10 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
               <article className="grid items-center gap-8 rounded-tile bg-card p-6 hairline md:grid-cols-2 md:gap-12 md:p-10">
                 <Card
                   tone="bg"
-                  notched
-                  className={reversed ? "md:order-2" : "md:order-1"}
+                  className={cn(
+                    "overflow-hidden",
+                    reversed ? "md:order-2" : "md:order-1",
+                  )}
                 >
                   {mocks[i % mocks.length]}
                 </Card>
@@ -250,7 +253,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
             name: service.name,
             description: service.blurb,
             brand: { "@type": "Brand", name: "Dolopreneur" },
-          }),
+          }).replace(/</g, "\\u003c"),
         }}
       />
       <FAQPageLd items={service.faq} />

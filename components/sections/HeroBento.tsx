@@ -1,18 +1,14 @@
 import { ArrowRight, Layers3, MessageSquareText, PhoneCall } from "lucide-react";
-import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { ChatThread } from "@/components/product-mocks/ChatThread";
-import { PageBuilderCanvas } from "@/components/product-mocks/PageBuilderCanvas";
-import { CallTranscript } from "@/components/product-mocks/CallTranscript";
-import { DashboardChart } from "@/components/product-mocks/DashboardChart";
-import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { Reveal } from "@/components/motion/Reveal";
 
 export function HeroBento() {
   return (
-    <section className="container-page flex flex-col justify-center py-8 md:h-full md:py-10">
-      <div className="grid items-center gap-10 md:grid-cols-[1fr_1.1fr] md:gap-12 lg:gap-16">
-        {/* Left column, anchor of the hero. Always visible. */}
-        <div className="flex flex-col gap-7">
+    <section className="flex flex-col md:grid md:h-full md:grid-cols-2 md:items-stretch">
+      {/* Left half, the text. Vertically centered, kept readable on wide screens
+          and pushed toward the seam so it reads as balanced beside the film. */}
+      <div className="flex items-center px-5 py-10 md:py-0 md:pl-10 md:pr-12 lg:pl-16 lg:pr-16">
+        <div className="flex w-full max-w-[34rem] flex-col gap-7 md:ml-auto">
           <Reveal as="h1" className="max-w-[16ch] text-[40px] sm:text-[48px] md:text-[52px] lg:text-[60px] xl:text-[68px] leading-[1.02]" y={20}>
             Run a{" "}
             <span className="scribble-underline">$100M</span>{" "}
@@ -49,36 +45,21 @@ export function HeroBento() {
             </p>
           </Reveal>
         </div>
-
-        {/* Right column, 2x2 mosaic. Each tile is a complete, framed screenshot. */}
-        <Stagger className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4" initialDelay={0.18}>
-          <StaggerItem>
-            <Card className="aspect-[5/4] overflow-hidden shadow-tile">
-              <ChatThread />
-            </Card>
-          </StaggerItem>
-
-          <StaggerItem>
-            <Card className="aspect-[5/4] overflow-hidden shadow-tile">
-              <PageBuilderCanvas />
-            </Card>
-          </StaggerItem>
-
-          <StaggerItem>
-            <div className="aspect-[5/4] overflow-hidden rounded-tile bg-surface-dark p-1.5 shadow-tile">
-              <div className="h-full overflow-hidden rounded-[10px] bg-card text-ink">
-                <DashboardChart />
-              </div>
-            </div>
-          </StaggerItem>
-
-          <StaggerItem>
-            <Card className="aspect-[5/4] overflow-hidden shadow-tile">
-              <CallTranscript />
-            </Card>
-          </StaggerItem>
-        </Stagger>
       </div>
+
+      {/* Right half, the cinematic brand film, full-bleed to the viewport edge. */}
+      <Reveal y={0} delay={0.15} className="relative h-[44vh] w-full bg-surface-dark md:h-full">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/brand-film.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          aria-label="Dolopreneur brand film"
+        />
+      </Reveal>
     </section>
   );
 }

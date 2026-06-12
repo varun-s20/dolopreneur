@@ -39,7 +39,7 @@ export function ScribbleSquiggle(props: SVGProps<SVGSVGElement>) {
       viewBox="0 0 300 80"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="9"
       strokeLinecap="round"
       preserveAspectRatio="none"
       {...props}

@@ -7,11 +7,6 @@ export function CallTranscript({ className }: { className?: string }) {
     <MockShell
       kind="call"
       subtitle="01:42"
-      trailing={
-        <span className="inline-flex items-center gap-1 rounded-pill bg-accent/30 px-2 py-0.5 text-[10px] font-semibold text-ink">
-          <Sparkles className="h-2.5 w-2.5" /> VoxAgent
-        </span>
-      }
       footer={
         <div className="flex items-center justify-between">
           <span className="inline-flex items-center gap-1">

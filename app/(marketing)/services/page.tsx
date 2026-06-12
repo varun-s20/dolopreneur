@@ -10,6 +10,7 @@ import { CallTranscript } from "@/components/product-mocks/CallTranscript";
 import { services } from "@/content/services";
 import { BreadcrumbLd } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/seo";
+import { cn } from "@/lib/cn";
 
 export const metadata = buildMetadata({
   title: "Services",
@@ -47,8 +48,10 @@ export default function ServicesIndexPage() {
               <article className="grid items-center gap-8 rounded-tile bg-card p-6 hairline md:grid-cols-2 md:gap-12 md:p-10">
                 <Card
                   tone="bg"
-                  notched
-                  className={reversed ? "md:order-2" : "md:order-1"}
+                  className={cn(
+                    "overflow-hidden",
+                    reversed ? "md:order-2" : "md:order-1",
+                  )}
                 >
                   {mocks[s.slug]}
                 </Card>

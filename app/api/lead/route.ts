@@ -14,7 +14,8 @@ export async function POST(req: Request) {
     };
 
     // TODO: forward to ConverseOS webhook + CRM. Stubbed until backend creds are added.
-    console.log("[lead]", lead);
+    // Don't log name/email/message (PII) — record only non-identifying fields.
+    console.log("[lead] received", { company: lead.company, at: lead.at });
 
     return NextResponse.redirect(new URL("/contact?ok=1", req.url), { status: 303 });
   } catch {

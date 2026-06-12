@@ -12,6 +12,8 @@ type Props = HTMLAttributes<HTMLElement> & AriaAttributes & {
   once?: boolean;
   amount?: number;
   duration?: number;
+  /** optional materialize blur in px (0 = off, keeps existing behavior) */
+  blur?: number;
 };
 
 export function Reveal({
@@ -24,6 +26,7 @@ export function Reveal({
   once = true,
   amount = 0.35,
   duration = 0.7,
+  blur = 0,
   ...rest
 }: Props) {
   const reduced = useReducedMotion();
@@ -37,8 +40,8 @@ export function Reveal({
   return (
     <Tag
       className={className}
-      initial={{ opacity: 0, y, x }}
-      whileInView={{ opacity: 1, y: 0, x: 0 }}
+      initial={blur > 0 ? { opacity: 0, y, x, filter: `blur(${blur}px)` } : { opacity: 0, y, x }}
+      whileInView={blur > 0 ? { opacity: 1, y: 0, x: 0, filter: "blur(0px)" } : { opacity: 1, y: 0, x: 0 }}
       viewport={{ once, amount }}
       transition={{
         duration,
@@ -84,10 +87,12 @@ export function StaggerItem({
   children,
   className,
   y = 16,
+  blur = 0,
 }: {
   children: ReactNode;
   className?: string;
   y?: number;
+  blur?: number;
 }) {
   const reduced = useReducedMotion();
   if (reduced) return <div className={className}>{children}</div>;
@@ -95,8 +100,13 @@ export function StaggerItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+        hidden: blur > 0 ? { opacity: 0, y, filter: `blur(${blur}px)` } : { opacity: 0, y },
+        show: {
+          opacity: 1,
+          y: 0,
+          ...(blur > 0 ? { filter: "blur(0px)" } : {}),
+          transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+        },
       }}
     >
       {children}

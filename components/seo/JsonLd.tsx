@@ -6,8 +6,9 @@ function Script({ data }: { data: object }) {
   return (
     <script
       type="application/ld+json"
-      // Output is server-rendered and not user-controlled, so HTML injection here is safe.
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      // Server-rendered, non-user data. Escaping `<` is defense-in-depth so a stray
+      // "</script>" in any field can never break out of the script element.
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   );
 }

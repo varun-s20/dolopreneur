@@ -1,80 +1,79 @@
-import Link from "next/link";
-import { Pricing } from "@/components/sections/Pricing";
-import { PricingCompare } from "@/components/sections/PricingCompare";
-import { SectionLabel } from "@/components/ui/SectionLabel";
-import { FAQ } from "@/components/content/FAQ";
+import { PricingHero } from "@/components/sections/PricingHero";
+import { PlatformTiers } from "@/components/sections/PlatformTiers";
+import { AddOnShowcase } from "@/components/sections/AddOnShowcase";
+import { Bundles } from "@/components/sections/Bundles";
+import { MobileBuyBar } from "@/components/sections/MobileBuyBar";
+import { FaqAccordion } from "@/components/sections/FaqAccordion";
+import { Button } from "@/components/ui/Button";
 import { BreadcrumbLd, FAQPageLd } from "@/components/seo/JsonLd";
 import { Reveal } from "@/components/motion/Reveal";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Pricing",
-  description: "Three plans. One subscription. Everything ConverseOS, SiteForge, and VoxAgent does, in one bill.",
+  description:
+    "Get on the map with Secret World, then bolt on AI agents for voice, chat, sites, video, leads, and content. Simple monthly pricing, cancel anytime.",
   path: "/pricing",
 });
 
 const pricingFaq = [
   {
-    q: "Can I switch plans later?",
-    a: "Anytime. Upgrades take effect immediately and we pro-rate the difference. Downgrades take effect at the next billing cycle so you don't lose anything mid-month.",
+    q: "What's the difference between the platform and the add-ons?",
+    a: "The Secret World platform (Essential, Pro, Elite) is your storefront: your map listing, reviews, promotions, and customer messaging. The AI add-ons are optional agents that handle specific jobs like answering the phone, chatting with customers, building your site, generating video, finding leads, and creating content. Run the platform on its own, or stack add-ons on top.",
   },
   {
-    q: "What happens after the trial ends?",
-    a: "Your workspace stays put. We send a reminder 3 days before the trial ends. If you don't choose a plan, we pause your agents, no charges and no data deletion until you decide.",
+    q: "Can I mix and match add-ons?",
+    a: "Yes. Every add-on runs independently and bills separately, so you can subscribe to a Workflow Agent Pro and a Lead Generation Basic without touching your platform tier. Add or remove them whenever you like.",
   },
   {
-    q: "Do you offer annual pricing?",
-    a: "Yes. Toggle to annual on any plan for a 16% discount. We invoice annually with net-30 terms available on Agency.",
+    q: "How do the bundles save me money?",
+    a: "Bundles package the combinations operators reach for most at a single monthly price that's lower than subscribing to each piece on its own. The savings shown on each bundle are versus buying those items separately.",
   },
   {
-    q: "What is an AI interaction?",
-    a: "One inbound message answered by an agent, one outbound message in a campaign, or one minute of a voice call counts as one interaction. Overage is billed at $0.01 per interaction.",
+    q: "Is everything billed monthly?",
+    a: "Yes. Every plan, add-on, and bundle is a simple monthly subscription in USD. There are no contracts and no setup fees. Cancel anytime and your billing stops at the end of the current cycle.",
   },
   {
-    q: "Do you charge per number on VoxAgent?",
-    a: "Numbers included in your plan are free. Additional numbers are $4/mo each. Outbound minutes follow the standard interaction price.",
+    q: "How does checkout work?",
+    a: "Every plan links straight to a secure Stripe checkout. You can pay with any major card; Stripe handles billing, receipts, and renewals. You'll get an emailed receipt the moment you subscribe.",
   },
   {
-    q: "Is there a setup fee?",
-    a: "No setup fee on Starter or Operator. Agency includes a paid white-glove onboarding (rolled into the first invoice).",
+    q: "Can I upgrade or downgrade a tier later?",
+    a: "Anytime. Move up a tier and the new features unlock immediately; move down and the change takes effect at your next billing date so you keep what you've paid for this month.",
   },
 ];
 
 export default function PricingPage() {
   return (
     <>
-      <section className="container-page pb-4 pt-16 md:pt-24">
-        <Reveal><SectionLabel>Pricing</SectionLabel></Reveal>
-        <Reveal as="h1" delay={0.05} className="mt-6 max-w-[18ch] text-[44px] leading-[1.04] md:text-[72px]">
-          One bill. Every agent. Cancel anytime.
-        </Reveal>
-        <Reveal as="p" delay={0.12} className="mt-6 max-w-[58ch] text-lg text-ink/65 md:text-xl">
-          Start on Starter, graduate to Operator when traffic shows up, and roll into Agency when the clients do.
-        </Reveal>
-      </section>
-      <Pricing />
-      <PricingCompare />
+      <PricingHero />
+      <PlatformTiers />
+      <AddOnShowcase />
+      <Bundles />
 
       <section className="container-page py-20 md:py-28">
-        <div className="grid gap-10 md:grid-cols-[1fr_1.6fr] md:gap-16">
-          <div>
-            <Reveal><SectionLabel>FAQ</SectionLabel></Reveal>
-            <Reveal as="h2" delay={0.05} className="mt-6 max-w-[18ch] text-[32px] leading-[1.08] md:text-[44px]">
-              Pricing questions, answered.
+        <div className="grid items-start gap-10 md:grid-cols-[0.85fr_1.4fr] md:gap-16">
+          <div className="md:sticky md:top-28 md:self-start">
+            <Reveal as="h2" blur={6} className="max-w-[16ch] text-[32px] leading-[1.08] md:text-[46px]">
+              Questions, answered.
             </Reveal>
-            <Reveal as="p" delay={0.12} className="mt-4 text-[15px] text-ink/65">
-              Need a custom arrangement?{" "}
-              <Link href="/contact" className="font-medium text-ink underline-offset-4 hover:underline">
+            <Reveal as="p" delay={0.08} className="mt-5 max-w-[34ch] text-[15px] leading-relaxed text-ink/60">
+              Our team is here with clear, quick answers. Still weighing it up? Reach out
+              and we&apos;ll walk you through the right setup.
+            </Reveal>
+            <Reveal delay={0.16} className="mt-7">
+              <Button href="/contact" variant="dark" size="lg">
                 Talk to us
-              </Link>
-              .
+              </Button>
             </Reveal>
           </div>
-          <Reveal delay={0.1}>
-            <FAQ items={pricingFaq} />
+          <Reveal delay={0.1} blur={6}>
+            <FaqAccordion items={pricingFaq} />
           </Reveal>
         </div>
       </section>
+
+      <MobileBuyBar />
 
       <FAQPageLd items={pricingFaq} />
       <BreadcrumbLd
